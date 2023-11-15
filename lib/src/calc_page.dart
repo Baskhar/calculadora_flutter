@@ -1,0 +1,47 @@
+import 'package:calculadora_flutter/src/widgets/custom_button_hub.dart';
+import 'package:calculadora_flutter/src/widgets/custom_display.dart';
+import 'package:flutter/material.dart';
+
+import 'controllers/calc_controller.dart';
+
+class CalcPage extends StatefulWidget {
+  const CalcPage({super.key});
+
+  @override
+  State<CalcPage> createState() => _CalcPageState();
+}
+
+class _CalcPageState extends State<CalcPage> {
+
+  final controller = CalcController();
+
+  void _listener(){
+    setState(() {
+
+    });
+  }
+
+  @override
+  void initState() {
+
+    super.initState();
+    controller.addListener(_listener);
+  }
+  @override
+  void dispose() {
+   controller.removeListener(_listener);
+    super.dispose();
+
+  }
+  @override
+  Widget build(BuildContext context) {
+    return  Material(
+      child: Column(
+        children: [
+          Expanded(flex: 1,child: CustomDisplay(value: controller.display)),
+          Expanded(flex: 3,child: CustomButtonHub(onButtonClick: controller.onButtonClick),),
+        ],
+      ),
+    );
+  }
+}
